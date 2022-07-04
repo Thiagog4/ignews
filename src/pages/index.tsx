@@ -10,7 +10,7 @@ import { stripe } from './services/stripe';
 interface HomeProps {
   product: {
     priceId: string,
-    amount: number
+    amount: number,
   }
 }
 
@@ -40,9 +40,7 @@ export default function Home({ product }: HomeProps) {
 
 
 export const getStaticPropos: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve('price_1LGx7SFyhmVLaoPJaW7i3zxQ', {
-    expand: ['product']
-  })
+  const price = await stripe.prices.retrieve('price_1LGx7SFyhmVLaoPJaW7i3zxQ')
 
 
   const product = {
