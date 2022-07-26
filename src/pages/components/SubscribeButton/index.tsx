@@ -11,21 +11,23 @@ interface SubscribeButtonProps {
 export function SubscribeButton({ priceId }: SubscribeButtonProps) {
     const { data: session } = useSession();
 
-
     async function handleSubscribe() {
         if (!session) {
             signIn('github')
             return;
         }
         try {
+            console.log(session);
             const respose = await api.post('/subscribe')
 
             const { sessionId } = respose.data;
 
             const stripe = await getStripeJs()
 
+
             stripe.redirectToCheckout({ sessionId })
         } catch (err) {
+
             alert(err.message);
         }
     }
